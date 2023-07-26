@@ -2,9 +2,18 @@
 
 :root {
 	--background-default: #c2e5f08c;
-	--background-success: #0080268c;
+	--background-success: #4ccf008c;
 	--background-warning: #ffae008f;
 	--background-error: #ca2525a4;
+
+	--button-background-default: #c2e5f0cc;
+	--button-background-success: #4ccf00cc;
+	--button-background-warning: #ffae00cc;
+	--button-background-error: #ca2525cc;
+	--button-background-default-hilight: #c2e5f0;
+	--button-background-success-hilight: #4ccf00;
+	--button-background-warning-hilight: #ffae00;
+	--button-background-error-hilight: #ca2525;
 }
 
 * {
@@ -38,7 +47,7 @@ body {
 	display: none;
 	justify-content: flex-start;
 	align-items: center;
-	margin: 2px 0;
+	margin: 2px 0 0.7em 0;
 	padding: 2px 5px;
 	font-size: 12px;
 	font-style: italic;
@@ -61,7 +70,7 @@ body {
 }
 
 .input-block {
-	margin: 0.3em 0;
+	margin: 0.7em 0;
 }
 
 .command-block {
@@ -92,11 +101,20 @@ form .form-title {
 	text-transform: uppercase;
 }
 
+form label {
+	margin-bottom: 7px;
+	text-shadow: 0 0 3px #ffffff80;
+}
+
+form textarea {
+	min-height: 7em;
+	resize: vertical;
+}
+
 form input,
 form select,
 form textarea {
 	font-size: 20px;
-	margin-top: 0.5em;
 	padding: 0.4em 0.7em;
 	width: 100%;
 	border-radius: 5px;
@@ -152,14 +170,54 @@ form textarea.error:focus {
 	box-shadow: 0 0 7px var(--background-error) !important;
 }
 
-form label + input,
-form label + textarea {
-	margin: 3px 0 0.5em 0;
-}
 form button {
 	margin: auto;
 	padding: 0.5em;
+	border-radius: 0.5em;
+	cursor: pointer;
 }
 form button + button {
 	margin-left: 0.3em;
+}
+
+form button.btn-success {
+	border: solid 1px var(--button-background-success) !important;
+	box-shadow: 0 0 3px var(--button-background-success) !important;
+	background-color: var(--button-background-success) !important;
+}
+
+form button.btn-warning {
+	border: solid 1px var(--button-background-warning) !important;
+	box-shadow: 0 0 3px var(--button-background-warning) !important;
+	background-color: var(--button-background-warning) !important;
+}
+
+form button.btn-error {
+	border: solid 1px var(--button-background-error) !important;
+	box-shadow: 0 0 3px var(--button-background-error) !important;
+	background-color: var(--button-background-error) !important;
+}
+
+form button.btn-success:hover,
+form button.btn-success:focus {
+	border: solid 1px var(--button-background-success-hilight) !important;
+	outline: solid 1px var(--button-background-success) !important;
+	box-shadow: 0 0 3px var(--button-background-success-hilight) !important;
+	background-color: var(--button-background-success-hilight) !important;
+}
+
+form button.btn-warning:hover,
+form button.btn-warning:focus {
+	border: solid 1px var(--button-background-warning-hilight) !important;
+	outline: solid 1px var(--button-background-warning) !important;
+	box-shadow: 0 0 3px var(--button-background-warning-hilight) !important;
+	background-color: var(--button-background-warning-hilight) !important;
+}
+
+form button.btn-error:hover,
+form button.btn-error:focus {
+	border: solid 1px var(--button-background-error-hilight) !important;
+	outline: solid 1px var(--button-background-error) !important;
+	box-shadow: 0 0 3px var(--button-background-error-hilight) !important;
+	background-color: var(--button-background-error-hilight) !important;
 }
