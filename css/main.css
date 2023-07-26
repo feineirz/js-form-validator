@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap');
+
+:root {
+	--background-default: #c2e5f08c;
+	--background-success: #0080268c;
+	--background-warning: #ffae008f;
+	--background-error: #ca2525a4;
+}
+
+* {
+	font-family: 'Montserrat', 'Ubuntu', sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: url('/images/bg.jpg') fixed no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.form-container {
+	padding: 3em;
+	max-width: max(600px, 97%);
+	min-height: 400px;
+	border-radius: 1em;
+	background-color: #eeeeee90;
+}
+
+.input-block {
+	margin: 0.3em 0;
+}
+
+.message-label {
+	display: none;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 2px 0;
+	padding: 2px 5px;
+	font-size: 12px;
+	font-style: italic;
+	border-radius: 3px;
+}
+.message-label.success {
+	display: flex;
+	color: white;
+	background-color: var(--background-success);
+}
+.message-label.warning {
+	display: flex;
+	color: black;
+	background-color: var(--background-warning);
+}
+.message-label.error {
+	display: flex;
+	color: white;
+	background-color: var(--background-error);
+}
+
+form input,
+form select,
+form textarea {
+	font-size: 22px;
+	margin-top: 0.5em;
+	padding: 0.4em 0.7em;
+	width: 100%;
+	border-radius: 5px;
+	border: solid 1px var(--background-default);
+	outline: solid 1px var(--background-default);
+	box-shadow: 0 0 2px 2px var(--background-default);
+}
+form input.success,
+form select.success,
+form textarea.success {
+	border: solid 1px var(--background-success) !important;
+	box-shadow: 0 0 3px var(--background-success) !important;
+}
+form input.warning,
+form select.warning,
+form textarea.warning {
+	border: solid 1px var(--background-warning) !important;
+	box-shadow: 0 0 3px var(--background-warning) !important;
+}
+form input.error,
+form select.error,
+form textarea.error {
+	border: solid 1px var(--background-error) !important;
+	box-shadow: 0 0 3px var(--background-error) !important;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+	border: solid 1px var(--background-default) !important;
+	outline: solid 2px var(--background-default) !important;
+	box-shadow: 0 0 5px var(--background-default) !important;
+}
+form input.success:focus,
+form select.success:focus,
+form textarea.success:focus {
+	border: solid 1px var(--background-success) !important;
+	outline: solid 1px var(--background-success) !important;
+	box-shadow: 0 0 7px var(--background-success) !important;
+}
+form input.warning:focus,
+form select.warning:focus,
+form textarea.warning:focus {
+	border: solid 1px var(--background-warning) !important;
+	outline: solid 1px var(--background-warning) !important;
+	box-shadow: 0 0 7px var(--background-warning) !important;
+}
+form input.error:focus,
+form select.error:focus,
+form textarea.error:focus {
+	border: solid 1px var(--background-error) !important;
+	outline: solid 1px var(--background-error) !important;
+	box-shadow: 0 0 7px var(--background-error) !important;
+}

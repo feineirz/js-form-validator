@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Form Validator</title>
+
+		<link rel="stylesheet" href="/css/main.css" />
+	</head>
+	<body>
+		<div class="form-container">
+			<form action="#">
+				<div class="input-block">
+					<input
+						type="text"
+						name="username"
+						id="username"
+						data-validation-rule="username"
+					/>
+				</div>
+
+				<div class="input-block">
+					<input
+						type="password"
+						name="password"
+						id="password"
+						data-validation-rule="password"
+						data-validation-matching="confirm-password"
+					/>
+				</div>
+
+				<div class="input-block">
+					<input
+						type="password"
+						name="confirm-password"
+						id="confirm-password"
+						data-validation-rule="password"
+						data-validation-matching="password"
+					/>
+				</div>
+
+				<div class="input-block">
+					<input
+						type="email"
+						name="email"
+						id="email"
+						data-validation-rule="email"
+					/>
+				</div>
+			</form>
+		</div>
+		<script type="module" src="./js/form-validator.js"></script>
+	</body>
+</html>
