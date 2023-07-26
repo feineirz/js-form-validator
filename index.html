@@ -10,7 +10,9 @@
 	<body>
 		<div class="form-container">
 			<form action="#">
+				<div class="form-title">user registration</div>
 				<div class="input-block">
+					<label for="username">Username</label>
 					<input
 						type="text"
 						name="username"
@@ -20,6 +22,7 @@
 				</div>
 
 				<div class="input-block">
+					<label for="password">Password</label>
 					<input
 						type="password"
 						name="password"
@@ -30,6 +33,7 @@
 				</div>
 
 				<div class="input-block">
+					<label for="confirm-password">Confirm Password</label>
 					<input
 						type="password"
 						name="confirm-password"
@@ -40,12 +44,43 @@
 				</div>
 
 				<div class="input-block">
+					<label for="phone">Phone</label>
+					<input
+						type="tel"
+						name="phone"
+						id="phone"
+						data-validation-rule="phone"
+					/>
+				</div>
+
+				<div class="input-block">
+					<label for="email">Email</label>
 					<input
 						type="email"
 						name="email"
 						id="email"
 						data-validation-rule="email"
 					/>
+				</div>
+
+				<div class="input-block">
+					<label for="address">Address</label>
+					<textarea
+						name="address"
+						id="address"
+						data-validation-rule="address"
+					></textarea>
+				</div>
+
+				<div class="command-block">
+					<div class="command-block-info">
+						<p class="info-label">Already have an account?</p>
+						<p class="info-label">LOGIN</p>
+					</div>
+					<div class="button-group">
+						<button type="submit">SUBMIT</button>
+						<button>CANCEL</button>
+					</div>
 				</div>
 			</form>
 		</div>
