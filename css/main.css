@@ -6,6 +6,7 @@
 	--background-warning: #ffae008f;
 	--background-error: #ca2525a4;
 
+	--button-background-disabled: #afafafcc;
 	--button-background-default: #c2e5f0cc;
 	--button-background-success: #4ccf00cc;
 	--button-background-warning: #ffae00cc;
@@ -33,6 +34,21 @@ body {
 	background: url('/images/bg.jpg') fixed no-repeat;
 	background-size: cover;
 	background-position: center;
+}
+
+a,
+a:link {
+	text-decoration: none;
+	color: #0094cf;
+}
+
+a:hover,
+a:active {
+	color: #ca2525;
+}
+
+a:visited {
+	color: #0076a5;
 }
 
 .form-container {
@@ -198,26 +214,33 @@ form button.btn-error {
 	background-color: var(--button-background-error) !important;
 }
 
-form button.btn-success:hover,
-form button.btn-success:focus {
+form button.btn-success:hover :not(:disabled),
+form button.btn-success:focus :not(:disabled) {
 	border: solid 1px var(--button-background-success-hilight) !important;
 	outline: solid 1px var(--button-background-success) !important;
 	box-shadow: 0 0 3px var(--button-background-success-hilight) !important;
 	background-color: var(--button-background-success-hilight) !important;
 }
 
-form button.btn-warning:hover,
-form button.btn-warning:focus {
+form button.btn-warning:hover :not(:disabled),
+form button.btn-warning:focus :not(:disabled) {
 	border: solid 1px var(--button-background-warning-hilight) !important;
 	outline: solid 1px var(--button-background-warning) !important;
 	box-shadow: 0 0 3px var(--button-background-warning-hilight) !important;
 	background-color: var(--button-background-warning-hilight) !important;
 }
 
-form button.btn-error:hover,
-form button.btn-error:focus {
+form button.btn-error:hover :not(:disabled),
+form button.btn-error:focus :not(:disabled) {
 	border: solid 1px var(--button-background-error-hilight) !important;
 	outline: solid 1px var(--button-background-error) !important;
 	box-shadow: 0 0 3px var(--button-background-error-hilight) !important;
 	background-color: var(--button-background-error-hilight) !important;
+}
+
+form button:disabled {
+	border: solid 1px var(--button-background-disabled) !important;
+	box-shadow: 0 0 3px var(--button-background-disabled) !important;
+	background-color: var(--button-background-disabled) !important;
+	cursor: default !important;
 }
