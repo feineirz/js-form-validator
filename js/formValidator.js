@@ -26,19 +26,7 @@ IsExists validation API guide
 
 */
 
-import { rules } from './validationRules.js';
-
-let characterSet = {
-	uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-	lowercases: 'abcdefghijklmnopqrstuvwxyz',
-	digits: '0123456789',
-	symbols: '!@#$%^&?*()_+-=[]:;*,./<>≤',
-};
-characterSet.all =
-	characterSet.uppercases +
-	characterSet.lowercases +
-	characterSet.digits +
-	characterSet.symbols;
+import { rules, characterSet, strongPasswordRule } from './validationRules.js';
 
 const WordCapitalize = function (content, force = false) {
 	let words = [];
@@ -80,7 +68,7 @@ const SentenceCapitalize = function (content, force = false) {
 };
 
 const validateRule = async function (target, validationSubmitEntries) {
-	const parentForm = target.closest('form');
+	const parentForm = target.parentNode.closest('form.fv');
 
 	let matchingElement;
 	let matchingElementMessageLabel;
@@ -101,6 +89,9 @@ const validateRule = async function (target, validationSubmitEntries) {
 	}
 
 	let messageLabel = target.parentNode.querySelector('.fv-message-label');
+	if (!messageLabel)
+		messageLabel = target.parentNode.parentNode.querySelector('.fv-message-label');
+	if (!messageLabel) messageLabel = parentForm.querySelector('.fv-message-label');
 
 	if (!messageLabel) {
 		messageLabel = document.createElement('p');
@@ -183,6 +174,11 @@ const validateRule = async function (target, validationSubmitEntries) {
 					allowedCharactersHint +=
 						allowedCharactersHint === '' ? '(a-z)' : ', (a-z)';
 				}
+				if (vr?.allowCharacterSet.anycases) {
+					allowedCharacters += characterSet.anycases;
+					allowedCharactersHint +=
+						allowedCharactersHint === '' ? '(A-Z, a-z)' : ', (A-Z, a-z)';
+				}
 				if (vr?.allowCharacterSet.digits) {
 					allowedCharacters += characterSet.digits;
 					allowedCharactersHint +=
@@ -245,6 +241,37 @@ const validateRule = async function (target, validationSubmitEntries) {
 		}
 	}
 
+	// Check strong password
+	if (!foundError) {
+		if (vr?.strongPassword) {
+			if (!strongPasswordRule.test(target.value)) {
+				target.classList.add('error');
+				messageLabel.classList.add('error');
+				messageLabel.innerText =
+					'Password must contains (a-z, A-Z, 0-9 and symbol)!';
+				foundError = true;
+				return;
+			}
+		}
+	}
+
+	// Check email format for input[type=email]
+	if (!foundError) {
+		if (target.type === 'email') {
+			const regexp = new RegExp(
+				'^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]{2,4}(?:\\.[a-zA-Z]{2,4})?$'
+			);
+			if (!regexp.test(target.value)) {
+				target.classList.add('error');
+				messageLabel.classList.add('error');
+				messageLabel.innerText = 'Invalid Email address!';
+				foundError = true;
+				return;
+			}
+		}
+	}
+
+	// Correct url type
 	if (!foundError) {
 		if (target.type === 'url') {
 			// Try to re-format
@@ -377,7 +404,7 @@ const validateRule = async function (target, validationSubmitEntries) {
 };
 
 const assignRules = function () {
-	const forms = document.querySelectorAll('form');
+	const forms = document.querySelectorAll('form.fv');
 
 	if (forms) {
 		forms.forEach(form => {

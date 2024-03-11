@@ -4,6 +4,7 @@
 allowCharacterSet references
 	lowercases: 'abcdefghijklmnopqrstuvwxyz'
 	uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	anycases: lowercases + uppercaese
 	digits: '0123456789'
 	symbols: '!@#$%^&?*()_+-=[]:;*,./<>≤'
 	all: All of above
@@ -26,48 +27,113 @@ rules = {
         allowCharacterSet: {
             * See allowCharacterSet reference
         },
+		strongPassword: <true, false>, // S\Validate to use a combinations of a-z, A-Z, 0-9 and symbol in password by using strongPasswordRule
         textTransform: '<upper, lower, wordCapitalize, wordCapitalize-force, sentenceCapitalize, sentenceCapitalize-force>', // See textTransform references
     }
 }
 */
 
+export const characterSet = (function () {
+	const cs = {
+		uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+		lowercases: 'abcdefghijklmnopqrstuvwxyz',
+		digits: '0123456789',
+		symbols: '!@#$%^&?*()_+-=[]:;*,./<>≤',
+	};
+	cs.anycases = cs.lowercases + cs.uppercases;
+	cs.all = cs.uppercases + cs.lowercases + cs.digits + cs.symbols;
+
+	return cs;
+})();
+
+export const strongPasswordRule =
+	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=.])[A-Za-z\d!@#$%^&*()\-_+=.]{8,}$/;
+
 export const rules = {
+	example: {
+		minLength: 8,
+		maxLength: 24,
+		allowSpaces: false,
+		allowCharacterSet: {
+			all: true,
+		},
+		textTransform: 'lower',
+	},
 	username: {
 		minLength: 8,
 		maxLength: 24,
 		allowSpaces: false,
 		allowCharacterSet: {
-			lowercases: true,
+			anycases: true,
+			digits: true,
 		},
 		textTransform: 'lower',
-		required: true,
 	},
 	password: {
 		minLength: 8,
 		maxLength: 24,
 		allowSpaces: false,
-		allowCharacterSet: {
-			all: true,
-		},
-		required: true,
+		strongPassword: true,
 	},
-	phone: {
-		minLength: 8,
-		maxLength: 24,
-		allowSpaces: true,
-		allowCharacterSet: {
-			all: true,
-		},
-		required: true,
-	},
-	address: {
-		minLength: 8,
-		maxLength: 255,
-		allowSpaces: true,
-		allowCharacterSet: {
-			all: true,
-		},
+	firstname: {
+		minLength: 2,
+		allowSpaces: false,
 		textTransform: 'wordCapitalize-force',
 	},
-	required: true,
+	lastname: {
+		minLength: 2,
+		allowSpaces: false,
+		textTransform: 'wordCapitalize-force',
+	},
+	idnumber: {
+		minLength: 5,
+		maxLength: 20,
+		allowSpaces: false,
+		allowCharacterSet: {
+			anycases: true,
+			digits: true,
+		},
+		textTransform: 'upper',
+	},
+	address: {
+		minLength: 1,
+		allowSpaces: true,
+	},
+	zipcode: {
+		minLength: 5,
+		maxLength: 5,
+		allowSpaces: false,
+		allowCharacterSet: {
+			digits: true,
+		},
+	},
+	email: {
+		minLength: 3,
+		maxLength: 64,
+		allowSpaces: false,
+		allowCharacterSet: {
+			lowercases: true,
+			digits: true,
+			custom: '@_-.',
+		},
+		mustContains: [
+			{
+				characters: '@',
+				min: 1,
+			},
+			{
+				characters: characterSet.lowercases,
+				min: 1,
+			},
+			{
+				characters: '.',
+				min: 1,
+			},
+		],
+	},
+	phone: {
+		minLength: 9,
+		maxLength: 24,
+		allowSpaces: true,
+	},
 };
