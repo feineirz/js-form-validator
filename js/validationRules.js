@@ -24,6 +24,7 @@ rules = {
         maxLength: <number>, // Maximum text length to set "maxlength" attribute of the form element ***if set maxlength attribute in element, it will override this value
         allowSpaces: <true, false>, // Remove any space from input if set to false
         multiline: <true, false>, // Allow multi line if set to true else remove /n/r
+		required: <true, false>, // Restricted input field not to be empty if set to true
         allowCharacterSet: {
             * See allowCharacterSet reference
         },
